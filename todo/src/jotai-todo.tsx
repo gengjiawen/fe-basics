@@ -1,5 +1,5 @@
 import React from 'react'
-import { atom, useAtom } from 'jotai'
+import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 interface TodoItem {
@@ -31,10 +31,14 @@ const TodoList = () => {
 
   return (
     <div>
+      <h1 className="text-2xl font-bold mb-4">Jotai Todos</h1>
       <TodoInput addTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} onClick={() => toggleTodo(todo.id)}>
+          <li
+            key={todo.id}
+            onClick={() => toggleTodo(todo.id)}
+          >
             {todo.completed ? <s>{todo.text}</s> : todo.text}
           </li>
         ))}
@@ -53,7 +57,11 @@ const TodoInput = ({ addTodo }: { addTodo: (text: string) => void }) => {
 
   return (
     <div>
-      <input value={input} onChange={(e) => setInput(e.target.value)} />
+      <input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        className="border p-2 mr-2"
+      />
       <button onClick={submit}>Add</button>
     </div>
   )

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
+// Define types
 interface Todo {
   id: number;
   text: string;
@@ -14,21 +16,29 @@ interface TodoStore {
   removeTodo: (id: number) => void;
 }
 
-// Create the store
-const useStore = create<TodoStore>((set) => ({
-  todos: [],
-  addTodo: (text: string) => set((state) => ({
-    todos: [...state.todos, { id: Date.now(), text, completed: false }]
-  })),
-  toggleTodo: (id: number) => set((state) => ({
-    todos: state.todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    )
-  })),
-  removeTodo: (id: number) => set((state) => ({
-    todos: state.todos.filter(todo => todo.id !== id)
-  })),
-}));
+// Create the store with persistence
+const useStore = create<TodoStore>()(
+  persist(
+    (set) => ({
+      todos: [],
+      addTodo: (text: string) => set((state) => ({
+        todos: [...state.todos, { id: Date.now(), text, completed: false }]
+      })),
+      toggleTodo: (id: number) => set((state) => ({
+        todos: state.todos.map(todo =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        )
+      })),
+      removeTodo: (id: number) => set((state) => ({
+        todos: state.todos.filter(todo => todo.id !== id)
+      })),
+    }),
+    {
+      name: 'todo-storage', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+    }
+  )
+);
 
 const ZustandTodos: React.FC = () => {
   const { todos, addTodo, toggleTodo, removeTodo } = useStore();

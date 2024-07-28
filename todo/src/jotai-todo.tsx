@@ -50,19 +50,22 @@ const TodoList = () => {
 const TodoInput = ({ addTodo }: { addTodo: (text: string) => void }) => {
   const [input, setInput] = React.useState('')
 
-  const submit = () => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     addTodo(input)
     setInput('')
   }
 
   return (
     <div>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className="border p-2 mr-2"
-      />
-      <button onClick={submit}>Add</button>
+      <form onSubmit={submit} className="mb-4">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className="border p-2 mr-2"
+        />
+        <button type="submit">Add</button>
+      </form>
     </div>
   )
 }

@@ -17,7 +17,7 @@ interface TodoStore {
 }
 
 // Create the store with persistence
-const useStore = create<TodoStore>()(
+const useTodoStore = create<TodoStore>()(
   persist(
     (set) => ({
       todos: [],
@@ -41,7 +41,7 @@ const useStore = create<TodoStore>()(
 );
 
 const ZustandTodos: React.FC = () => {
-  const { todos, addTodo, toggleTodo, removeTodo } = useStore();
+  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore();
   const [newTodo, setNewTodo] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

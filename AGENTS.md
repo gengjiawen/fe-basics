@@ -12,10 +12,10 @@ Each app keeps source code in `src/`, static files in `public/`, and imported as
 ## Build, Test, and Development Commands
 
 - `pnpm install`: install workspace dependencies.
+- `pnpm lint`: lint all workspace source from the root with Oxlint.
 - `pnpm build`: run every package build via `pnpm -r build`.
 - `pnpm dev:todo`: start the React todo app with Vite.
 - `pnpm dev:preact-react-virtual`: start the Preact virtual list app with Vite.
-- `pnpm --filter todo lint`: run the todo package ESLint rules.
 - `pnpm --filter <package> build`: build one package, e.g. `pnpm --filter preact-react-virtual build`.
 - `pnpm --filter <package> preview`: preview a built Vite package locally.
 
@@ -27,7 +27,7 @@ Name React/Preact components in `PascalCase`, hooks with a `use` prefix, and typ
 
 ## Testing Guidelines
 
-There is no test runner configured yet. Treat TypeScript builds as the required correctness check and run `pnpm build` before submitting changes. For `todo`, also run `pnpm --filter todo lint`.
+There is no test runner configured yet. Treat Oxlint and TypeScript builds as the required correctness checks and run `pnpm lint` plus `pnpm build` before submitting changes.
 
 If adding tests, colocate them near covered code as `*.test.ts` or `*.test.tsx`, and add a package `test` script for `pnpm --filter <package> test`.
 

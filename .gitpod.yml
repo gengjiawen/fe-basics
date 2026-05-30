@@ -1,3 +1,0 @@
-
-tasks:
-  - init: cd todo && pnpm i && pnpm dev

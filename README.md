@@ -19,3 +19,4 @@ Preact virtual list example for checking whether a React ecosystem virtual scrol
 - Displays a virtualized list of 10,000 job records.
 - Supports filtering by job status.
 - Shows both the total row count and the number of mounted rows, making it easy to see whether virtualization is active.
+- Keeps Preact, Preact compat, and the React-facing virtualizer path on readable source modules during development, so behavior can be inspected without the extra noise from Vite dependency pre-bundling or Preact's optimized package output.

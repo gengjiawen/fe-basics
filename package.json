@@ -3,11 +3,19 @@
   "private": true,
   "scripts": {
     "build": "pnpm -r build",
+    "format": "oxfmt --write",
     "lint": "oxlint --deny-warnings .",
+    "prepare": "husky",
     "dev:todo": "pnpm --filter todo dev",
     "dev:preact-react-virtual": "pnpm --filter preact-react-virtual dev"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "oxfmt": "^0.47.0",
     "oxlint": "^1.67.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc,md,mdx}": "oxfmt --write"
   }
 }

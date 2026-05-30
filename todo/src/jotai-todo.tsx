@@ -1,6 +1,6 @@
-import React from 'react'
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
+import React from 'react'
 
 interface TodoItem {
   id: number
@@ -15,17 +15,12 @@ const TodoList = () => {
   const [todos, setTodos] = useAtom(todoListAtom)
 
   const addTodo = (text: string) => {
-    setTodos((oldTodos) => [
-      ...oldTodos,
-      { id: Date.now(), text, completed: false },
-    ])
+    setTodos((oldTodos) => [...oldTodos, { id: Date.now(), text, completed: false }])
   }
 
   const toggleTodo = (id: number) => {
     setTodos((oldTodos) =>
-      oldTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+      oldTodos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)),
     )
   }
 
@@ -35,10 +30,7 @@ const TodoList = () => {
       <TodoInput addTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
-          >
+          <li key={todo.id} onClick={() => toggleTodo(todo.id)}>
             {todo.completed ? <s>{todo.text}</s> : todo.text}
           </li>
         ))}
@@ -51,7 +43,7 @@ const TodoInput = ({ addTodo }: { addTodo: (text: string) => void }) => {
   const [input, setInput] = React.useState('')
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     addTodo(input)
     setInput('')
   }

@@ -1,5 +1,5 @@
-import { useMemo, useRef, useState } from 'preact/hooks'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { useMemo, useRef, useState } from 'preact/hooks'
 import './app.css'
 
 type Status = 'queued' | 'rendering' | 'synced' | 'retrying'
@@ -103,10 +103,7 @@ export function App() {
         </div>
 
         <div class="viewport" ref={parentRef}>
-          <div
-            class="spacer"
-            style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
-          >
+          <div class="spacer" style={{ height: `${rowVirtualizer.getTotalSize()}px` }}>
             {virtualItems.map((virtualItem) => {
               const row = visibleRows[virtualItem.index]
 
@@ -124,9 +121,7 @@ export function App() {
                     <small>#{row.id}</small>
                   </span>
                   <span>{row.owner}</span>
-                  <span class={`status ${row.status}`}>
-                    {statusLabels[row.status]}
-                  </span>
+                  <span class={`status ${row.status}`}>{statusLabels[row.status]}</span>
                   <span>{row.bytes}</span>
                   <span>{row.latency} ms</span>
                 </article>

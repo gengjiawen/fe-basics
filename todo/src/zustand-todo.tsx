@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import React, { useState } from 'react'
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 // Define types
 interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
+  id: number
+  text: string
+  completed: boolean
 }
 
 interface TodoStore {
-  todos: Todo[];
-  addTodo: (text: string) => void;
-  toggleTodo: (id: number) => void;
-  removeTodo: (id: number) => void;
+  todos: Todo[]
+  addTodo: (text: string) => void
+  toggleTodo: (id: number) => void
+  removeTodo: (id: number) => void
 }
 
 // Create the store with persistence
@@ -21,36 +21,39 @@ const useTodoStore = create<TodoStore>()(
   persist(
     (set) => ({
       todos: [],
-      addTodo: (text: string) => set((state) => ({
-        todos: [...state.todos, { id: Date.now(), text, completed: false }]
-      })),
-      toggleTodo: (id: number) => set((state) => ({
-        todos: state.todos.map(todo =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        )
-      })),
-      removeTodo: (id: number) => set((state) => ({
-        todos: state.todos.filter(todo => todo.id !== id)
-      })),
+      addTodo: (text: string) =>
+        set((state) => ({
+          todos: [...state.todos, { id: Date.now(), text, completed: false }],
+        })),
+      toggleTodo: (id: number) =>
+        set((state) => ({
+          todos: state.todos.map((todo) =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+          ),
+        })),
+      removeTodo: (id: number) =>
+        set((state) => ({
+          todos: state.todos.filter((todo) => todo.id !== id),
+        })),
     }),
     {
       name: 'todo-storage', // name of the item in the storage (must be unique)
       storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
-    }
-  )
-);
+    },
+  ),
+)
 
 const ZustandTodos: React.FC = () => {
-  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore();
-  const [newTodo, setNewTodo] = useState<string>('');
+  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore()
+  const [newTodo, setNewTodo] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (newTodo.trim()) {
-      addTodo(newTodo);
-      setNewTodo('');
+      addTodo(newTodo)
+      setNewTodo('')
     }
-  };
+  }
 
   return (
     <div className="p-4 max-w-md mx-auto">
@@ -63,7 +66,9 @@ const ZustandTodos: React.FC = () => {
           placeholder="Add a new todo"
           className="border p-2 mr-2"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Todo</button>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          Add Todo
+        </button>
       </form>
       <ul>
         {todos.map((todo) => (
@@ -85,7 +90,7 @@ const ZustandTodos: React.FC = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default ZustandTodos;
+export default ZustandTodos

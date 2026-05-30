@@ -6,10 +6,7 @@
     "node": true,
     "es2024": true
   },
-  "ignorePatterns": [
-    "**/dist/**",
-    "**/node_modules/**"
-  ],
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
   "settings": {
     "react": {
       "version": "18.3.1"

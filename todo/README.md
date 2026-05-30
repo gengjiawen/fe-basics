@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# Todo State Management Examples
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React + TypeScript + Vite project for comparing basic Jotai and Zustand state management patterns in Todo and shared-state examples.
 
-Currently, two official plugins are available:
+## Pages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Jotai Todos
 
-## Expanding the ESLint configuration
+File: `src/jotai-todo.tsx`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This page demonstrates how to manage a Todo list with Jotai.
 
-- Configure the top-level `parserOptions` property like this:
+- Uses `atomWithStorage` to create `todoListAtom` and persist the list in `localStorage`.
+- Type a Todo and click Add to create a new item.
+- Click a Todo text item to toggle it between completed and incomplete.
+- Completed Todos are displayed with a strikethrough.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Zustand Todos
+
+File: `src/zustand-todo.tsx`
+
+This page demonstrates how to manage a Todo list with Zustand.
+
+- Uses `create` to define `useTodoStore`, which stores `todos`, `addTodo`, `toggleTodo`, and `removeTodo`.
+- Uses `persist` and `createJSONStorage` to persist the list in `localStorage`.
+- Type a Todo and click Add Todo to create a new item.
+- Check the checkbox to toggle the completed state.
+- Click Remove to delete a Todo.
+
+### Jotai Counter Demo
+
+File: `src/JotaiMultiDemo.tsx`
+
+This page demonstrates how multiple components can share the same Jotai atom.
+
+- `ComponentA` and `ComponentB` both read from the same `sharedDataAtom`.
+- Both components display the current counter value.
+- Clicking Increment Counter in either component updates the counter in both components.
+- This page focuses on the basic pattern for sharing state across components with Jotai.
+
+## App Entry
+
+File: `src/App.tsx`
+
+`App` renders these three pages in order:
+
+1. `JotaiTodo`
+2. `ZustandTodos`
+3. `JotaiMulitDemo`
+
+The project does not currently use routing, so all three pages are shown on the same browser page.
+
+## Run
+
+```bash
+pnpm install
+pnpm dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Build
+
+```bash
+pnpm build
+```

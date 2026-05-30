@@ -1,7 +1,8 @@
-import preact from '@preact/preset-vite'
 import { fileURLToPath } from 'node:url'
+import preact from '@preact/preset-vite'
 import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
+import { viteSingleFile } from 'vite-plugin-singlefile'
 
 const preactSource = (path: string) =>
   fileURLToPath(new URL(`./node_modules/preact/${path}`, import.meta.url))
@@ -49,12 +50,22 @@ const keepSourceDepsOutOfOptimizer = (): Plugin => {
 // https://vite.dev/config/
 export default defineConfig({
   build: {
+    copyPublicDir: false,
     minify: false,
+    rolldownOptions: {
+      output: {
+        codeSplitting: false,
+      },
+    },
   },
   optimizeDeps: {
     exclude: sourceOnlyDeps,
   },
-  plugins: [preact({ reactAliasesEnabled: false }), keepSourceDepsOutOfOptimizer()],
+  plugins: [
+    preact({ reactAliasesEnabled: false }),
+    keepSourceDepsOutOfOptimizer(),
+    viteSingleFile(),
+  ],
   resolve: {
     alias: [
       {

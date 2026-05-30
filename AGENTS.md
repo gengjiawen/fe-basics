@@ -33,7 +33,7 @@ If adding tests, colocate them near covered code as `*.test.ts` or `*.test.tsx`,
 
 ## Commit & Pull Request Guidelines
 
-Recent commits use short imperative messages, sometimes with prefixes such as `docs:`, `chore:`, and `feat:`. Prefer `type: summary`, for example `feat: add virtual row filter`; otherwise keep the subject concise.
+Use Conventional Commits for commit messages: `type(scope): summary` when a scope is useful, or `type: summary` for repo-wide changes. Keep the subject concise and imperative, for example `feat(preact-react-virtual): add virtual row filter`.
 
 Pull requests should name the affected package, summarize behavior changes, link issues, and include screenshots or recordings for UI changes. List commands run, especially `pnpm build`, lint, or package-specific checks.
 

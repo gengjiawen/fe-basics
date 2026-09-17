@@ -33,9 +33,10 @@ File: `src/JotaiMultiDemo.tsx`
 
 This page demonstrates how multiple components can share the same Jotai atom.
 
-- `ComponentA` and `ComponentB` both read from the same `sharedDataAtom`.
+- Component A and Component B are two instances of the same `CounterPanel`, and both read from the same `sharedDataAtom`.
 - Both components display the current counter value.
 - Clicking Increment Counter in either component updates the counter in both components.
+- The update uses the functional form `setData((count) => count + 1)`, so the next value is derived from the current one rather than from the value captured by the render that created the handler.
 - This page focuses on the basic pattern for sharing state across components with Jotai.
 
 ## App Entry

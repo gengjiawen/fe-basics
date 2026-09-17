@@ -24,14 +24,26 @@ const TodoList = () => {
     )
   }
 
+  const removeTodo = (id: number) => {
+    setTodos((oldTodos) => oldTodos.filter((todo) => todo.id !== id))
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Jotai Todos</h1>
       <TodoInput addTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} onClick={() => toggleTodo(todo.id)}>
-            {todo.completed ? <s>{todo.text}</s> : todo.text}
+          <li key={todo.id} className="flex items-center mb-2">
+            <span onClick={() => toggleTodo(todo.id)}>
+              {todo.completed ? <s>{todo.text}</s> : todo.text}
+            </span>
+            <button
+              onClick={() => removeTodo(todo.id)}
+              className="ml-auto bg-red-500 text-white p-1 rounded"
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>
@@ -44,6 +56,9 @@ const TodoInput = ({ addTodo }: { addTodo: (text: string) => void }) => {
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!input.trim()) {
+      return
+    }
     addTodo(input)
     setInput('')
   }

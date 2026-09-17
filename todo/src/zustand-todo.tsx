@@ -44,7 +44,10 @@ const useTodoStore = create<TodoStore>()(
 )
 
 const ZustandTodos: React.FC = () => {
-  const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore()
+  const todos = useTodoStore((state) => state.todos)
+  // Actions are stable references from `create`. `getState()` reads them without
+  // subscribing, so this component re-renders only when `todos` changes.
+  const { addTodo, toggleTodo, removeTodo } = useTodoStore.getState()
   const [newTodo, setNewTodo] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

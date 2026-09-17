@@ -11,5 +11,16 @@
     "react": {
       "version": "18.3.1"
     }
-  }
+  },
+  "overrides": [
+    {
+      // This package intentionally pairs Preact with @tanstack/react-virtual via the
+      // preact/compat aliases in its vite.config.ts. react/incompatible-library only
+      // matters under the React Compiler, which this workspace does not use.
+      "files": ["preact-react-virtual/**"],
+      "rules": {
+        "react/incompatible-library": "off"
+      }
+    }
+  ]
 }

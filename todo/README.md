@@ -11,9 +11,10 @@ File: `src/jotai-todo.tsx`
 This page demonstrates how to manage a Todo list with Jotai.
 
 - Uses `atomWithStorage` to create `todoListAtom` and persist the list in `localStorage`.
-- Type a Todo and click Add to create a new item.
+- Type a Todo and click Add to create a new item. Blank input is ignored.
 - Click a Todo text item to toggle it between completed and incomplete.
 - Completed Todos are displayed with a strikethrough.
+- Click Remove to delete a Todo.
 
 ### Zustand Todos
 

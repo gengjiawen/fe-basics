@@ -44,13 +44,8 @@ const useTodoStore = create<TodoStore>()(
 )
 
 const ZustandTodos: React.FC = () => {
-  // Subscribe with one selector per value instead of destructuring `useTodoStore()`.
-  // A bare `useTodoStore()` returns the whole store, so the component re-renders on
-  // every state change; a selector only re-renders when its own slice changes.
   const todos = useTodoStore((state) => state.todos)
-  const addTodo = useTodoStore((state) => state.addTodo)
-  const toggleTodo = useTodoStore((state) => state.toggleTodo)
-  const removeTodo = useTodoStore((state) => state.removeTodo)
+  const { addTodo, toggleTodo, removeTodo } = useTodoStore.getState()
   const [newTodo, setNewTodo] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -22,7 +22,7 @@ File: `src/zustand-todo.tsx`
 This page demonstrates how to manage a Todo list with Zustand.
 
 - Uses `create` to define `useTodoStore`, which stores `todos`, `addTodo`, `toggleTodo`, and `removeTodo`.
-- Reads each value through a selector, for example `useTodoStore((state) => state.todos)`, so a component only re-renders when the slice it selected changes. Calling `useTodoStore()` without a selector returns the whole store and re-renders on every change.
+- Reads `todos` with a selector (`useTodoStore((state) => state.todos)`). Actions are stable, so they come from `useTodoStore.getState()` instead of a whole-store subscription.
 - Uses `persist` and `createJSONStorage` to persist the list in `localStorage`.
 - Type a Todo and click Add Todo to create a new item.
 - Check the checkbox to toggle the completed state.

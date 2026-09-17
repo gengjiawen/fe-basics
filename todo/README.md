@@ -46,7 +46,7 @@ File: `src/App.tsx`
 
 1. `JotaiTodo`
 2. `ZustandTodos`
-3. `JotaiMulitDemo`
+3. `JotaiMultiDemo`
 
 The project does not currently use routing, so all three pages are shown on the same browser page.
 

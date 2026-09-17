@@ -1,6 +1,6 @@
 import './App.css'
 import { JotaiTodo } from './jotai-todo'
-import JotaiMulitDemo from './JotaiMultiDemo'
+import JotaiMultiDemo from './JotaiMultiDemo'
 import ZustandTodos from './zustand-todo'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
       <JotaiTodo />
       <ZustandTodos />
-      <JotaiMulitDemo />
+      <JotaiMultiDemo />
     </>
   )
 }

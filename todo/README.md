@@ -1,6 +1,6 @@
 # Todo State Management Examples
 
-This is a React + TypeScript + Vite project for comparing basic Jotai and Zustand state management patterns in Todo and shared-state examples.
+This is a React + TypeScript + Vite project for comparing basic Jotai and Zustand state management patterns in Todo examples.
 
 ## Pages
 
@@ -29,29 +29,16 @@ This page demonstrates how to manage a Todo list with Zustand.
 - Check the checkbox to toggle the completed state.
 - Click Remove to delete a Todo.
 
-### Jotai Counter Demo
-
-File: `src/JotaiMultiDemo.tsx`
-
-This page demonstrates how multiple components can share the same Jotai atom.
-
-- Component A and Component B are two instances of the same `CounterPanel`, and both read from the same `sharedDataAtom`.
-- Both components display the current counter value.
-- Clicking Increment Counter in either component updates the counter in both components.
-- The update uses the functional form `setData((count) => count + 1)`, so the next value is derived from the current one rather than from the value captured by the render that created the handler.
-- This page focuses on the basic pattern for sharing state across components with Jotai.
-
 ## App Entry
 
 File: `src/App.tsx`
 
-`App` renders these three pages in order:
+`App` renders these two pages in order:
 
 1. `JotaiTodo`
 2. `ZustandTodos`
-3. `JotaiMultiDemo`
 
-The project does not currently use routing, so all three pages are shown on the same browser page.
+The project does not currently use routing, so both pages are shown on the same browser page.
 
 ## Run
 

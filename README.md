@@ -8,8 +8,8 @@ This repository collects small frontend examples. Each directory focuses on one 
 
 React state management examples using the same Todo scenario across different state libraries.
 
-- Jotai Todo: manages a Todo list with atoms and persists the data to localStorage.
-- Zustand Todo: manages Todo creation, completion toggling, and deletion with a store persisted to localStorage.
+- Jotai Todo: manages a Todo list with atoms, filters it through a derived atom, and persists the data to localStorage.
+- Zustand Todo: manages Todo creation, completion toggling, deletion, and status filtering with a store persisted to localStorage.
 
 ### preact-react-virtual
 

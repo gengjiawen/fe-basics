@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.0.0",
   "private": true,
+  "description": "React state management examples using the same Todo scenario across different state libraries.",
   "type": "module",
   "scripts": {
     "dev": "vite",

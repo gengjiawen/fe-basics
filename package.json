@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm -r build",
+    "build:site": "pnpm build && node scripts/build-site.mjs",
     "format": "oxfmt --write",
     "lint": "oxlint --deny-warnings .",
     "prepare": "husky",

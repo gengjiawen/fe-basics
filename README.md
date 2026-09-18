@@ -19,3 +19,7 @@ Preact virtual list example for checking whether a React ecosystem virtual scrol
 - Supports filtering by job status.
 - Shows both the total row count and the number of mounted rows, making it easy to see whether virtualization is active.
 - Keeps Preact, Preact compat, and the React-facing virtualizer path on readable source modules during development, so behavior can be inspected without the extra noise from Vite dependency pre-bundling or Preact's optimized package output.
+
+## Preview
+
+Every example is deployed together as a single static site: the generated index page lists the examples, and each one is served from its own directory, for example `/todo/`. Run `pnpm build:site` to produce the same site locally in `dist/`; `scripts/build-site.mjs` discovers the examples from the pnpm workspace, so a new package shows up on the index page once it has a `build` script and a `description` in its `package.json`.

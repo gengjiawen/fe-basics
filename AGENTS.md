@@ -14,6 +14,7 @@ Each app keeps source code in `src/`, static files in `public/`, and imported as
 - `pnpm install`: install workspace dependencies.
 - `pnpm lint`: lint all workspace source from the root with Oxlint.
 - `pnpm build`: run every package build via `pnpm -r build`.
+- `pnpm build:site`: build every package and aggregate the output into the deployable site in `dist/`.
 - `pnpm dev:todo`: start the React todo app with Vite.
 - `pnpm dev:preact-react-virtual`: start the Preact virtual list app with Vite.
 - `pnpm --filter <package> build`: build one package, e.g. `pnpm --filter preact-react-virtual build`.

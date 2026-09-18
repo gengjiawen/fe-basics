@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
@@ -9,11 +9,21 @@ interface Todo {
   completed: boolean
 }
 
+type TodoFilter = 'all' | 'active' | 'completed'
+
+const FILTERS: { value: TodoFilter; label: string }[] = [
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'completed', label: 'Completed' },
+]
+
 interface TodoStore {
   todos: Todo[]
+  filter: TodoFilter
   addTodo: (text: string) => void
   toggleTodo: (id: number) => void
   removeTodo: (id: number) => void
+  setFilter: (filter: TodoFilter) => void
 }
 
 // Create the store with persistence
@@ -21,6 +31,7 @@ const useTodoStore = create<TodoStore>()(
   persist(
     (set) => ({
       todos: [],
+      filter: 'all',
       addTodo: (text: string) =>
         set((state) => ({
           todos: [...state.todos, { id: Date.now(), text, completed: false }],
@@ -35,20 +46,37 @@ const useTodoStore = create<TodoStore>()(
         set((state) => ({
           todos: state.todos.filter((todo) => todo.id !== id),
         })),
+      setFilter: (filter: TodoFilter) => set({ filter }),
     }),
     {
       name: 'todo-storage', // name of the item in the storage (must be unique)
       storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+      // The filter is view state, so only the list is persisted
+      partialize: (state) => ({ todos: state.todos }),
     },
   ),
 )
 
 const ZustandTodos: React.FC = () => {
   const todos = useTodoStore((state) => state.todos)
+  const filter = useTodoStore((state) => state.filter)
   // Actions are stable references from `create`. `getState()` reads them without
-  // subscribing, so this component re-renders only when `todos` changes.
-  const { addTodo, toggleTodo, removeTodo } = useTodoStore.getState()
+  // subscribing, so this component re-renders only when `todos` or `filter` changes.
+  const { addTodo, toggleTodo, removeTodo, setFilter } = useTodoStore.getState()
   const [newTodo, setNewTodo] = useState<string>('')
+
+  // Filtering happens here rather than inside a selector: a selector that builds
+  // a new array hands back a fresh reference on every read, so the store would
+  // look changed on every render. `useShallow` is the other way out.
+  const visibleTodos = useMemo(() => {
+    if (filter === 'active') {
+      return todos.filter((todo) => !todo.completed)
+    }
+    if (filter === 'completed') {
+      return todos.filter((todo) => todo.completed)
+    }
+    return todos
+  }, [todos, filter])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -73,8 +101,19 @@ const ZustandTodos: React.FC = () => {
           Add Todo
         </button>
       </form>
+      <div className="flex gap-2 mb-4">
+        {FILTERS.map(({ value, label }) => (
+          <button
+            key={value}
+            onClick={() => setFilter(value)}
+            className={`p-1 rounded ${value === filter ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
       <ul>
-        {todos.map((todo) => (
+        {visibleTodos.map((todo) => (
           <li key={todo.id} className="flex items-center mb-2">
             <input
               type="checkbox"

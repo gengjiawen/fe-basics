@@ -13,7 +13,7 @@ This page demonstrates how to manage a Todo list with Jotai.
 - Uses `atomWithStorage` to create `todoListAtom` and persist the list in `localStorage`.
 - Keeps the current filter in a plain `filterAtom`, and derives the rendered list in `visibleTodoListAtom`, which Jotai recomputes whenever the list or the filter changes.
 - Type a Todo and click Add to create a new item. Blank input is ignored.
-- Click a Todo text item to toggle it between completed and incomplete.
+- Check the checkbox to toggle the completed state.
 - Completed Todos are displayed with a strikethrough.
 - Click All, Active, or Completed to filter the list. The filter is view state, so it is not persisted and resets to All on reload.
 - Click Remove to delete a Todo.

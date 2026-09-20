@@ -55,16 +55,20 @@ const TodoList = () => {
   }
 
   return (
-    <div>
+    <div className="p-4 max-w-md mx-auto">
       <h1 className="text-2xl font-bold mb-4">Jotai Todos</h1>
       <TodoInput addTodo={addTodo} />
       <TodoFilters />
       <ul>
         {visibleTodos.map((todo) => (
           <li key={todo.id} className="flex items-center mb-2">
-            <span onClick={() => toggleTodo(todo.id)}>
-              {todo.completed ? <s>{todo.text}</s> : todo.text}
-            </span>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+              className="mr-2"
+            />
+            <span className={todo.completed ? 'line-through' : ''}>{todo.text}</span>
             <button
               onClick={() => removeTodo(todo.id)}
               className="ml-auto bg-red-500 text-white p-1 rounded"
@@ -91,16 +95,18 @@ const TodoInput = ({ addTodo }: { addTodo: (text: string) => void }) => {
   }
 
   return (
-    <div>
-      <form onSubmit={submit} className="mb-4">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="border p-2 mr-2"
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
+    <form onSubmit={submit} className="mb-4">
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Add a new todo"
+        className="border p-2 mr-2"
+      />
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        Add
+      </button>
+    </form>
   )
 }
 

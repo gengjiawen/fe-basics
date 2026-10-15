@@ -10,6 +10,7 @@ React state management examples using the same Todo scenario across different st
 
 - Jotai Todo: manages a Todo list with atoms, filters it through a derived atom, and persists the data to localStorage.
 - Zustand Todo: manages Todo creation, completion toggling, deletion, and status filtering with a store persisted to localStorage.
+- Signals Todo: keeps the list and filter in module-level signals from `@preact/signals-react`, derives the visible list with `computed`, and persists the list to localStorage through an `effect`.
 
 ### preact-react-virtual
 

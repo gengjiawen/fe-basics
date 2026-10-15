@@ -48,6 +48,9 @@ importers:
 
   todo:
     dependencies:
+      '@preact/signals-react':
+        specifier: ^3.12.0
+        version: 3.12.0(react@19.2.8)
       jotai:
         specifier: ^3.0.0
         version: 3.0.0(@types/react@19.2.18)(react@19.2.8)
@@ -59,7 +62,7 @@ importers:
         version: 19.2.8(react@19.2.8)
       zustand:
         specifier: ^5.0.15
-        version: 5.0.15(@types/react@19.2.18)(react@19.2.8)
+        version: 5.0.15(@types/react@19.2.18)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.3.3
@@ -453,6 +456,14 @@ packages:
     peerDependencies:
       '@babel/core': 7.x
       vite: 2.x || 3.x || 4.x || 5.x || 6.x || 7.x || 8.x
+
+  '@preact/signals-core@1.14.4':
+    resolution: {integrity: sha512-HNB6HYeYKhQbJ1aKl+YRjrS4+QWHLKX6qKoUsfS/m0vqzsVaEBiZiaKbG/e+NKk2ch5ALQr/ihWaMHxiCuuWHA==}
+
+  '@preact/signals-react@3.12.0':
+    resolution: {integrity: sha512-o3zBSekC/RPcsHOYTLagjw6JX0ih5eMMFZE0AICEeuk7p3MrYOyEXxM7bmT1Uqi0jPy2pbuDQZTFXYe55IAFVg==}
+    peerDependencies:
+      react: ^16.14.0 || 17.x || 18.x || 19.x
 
   '@prefresh/babel-plugin@0.5.3':
     resolution: {integrity: sha512-57LX2SHs4BX2s1IwCjNzTE2OJeEepRCNf1VTEpbNcUyHfMO68eeOWGDIt4ob9aYlW6PEWZ1SuwNikuoIXANDtQ==}
@@ -1297,6 +1308,11 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
+  use-sync-external-store@1.7.0:
+    resolution: {integrity: sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   vite-plugin-singlefile@2.3.3:
     resolution: {integrity: sha512-XVnGH0QzbOa8fxRSsHdCarVN1BSBXNi7uLMQYlrGRN5apdHkk62XQWRJhVever0lnfuyBkwn+kvVChdm/OoOUg==}
     engines: {node: '>18.0.0'}
@@ -1670,6 +1686,14 @@ snapshots:
       - preact
       - rollup
       - supports-color
+
+  '@preact/signals-core@1.14.4': {}
+
+  '@preact/signals-react@3.12.0(react@19.2.8)':
+    dependencies:
+      '@preact/signals-core': 1.14.4
+      react: 19.2.8
+      use-sync-external-store: 1.7.0(react@19.2.8)
 
   '@prefresh/babel-plugin@0.5.3': {}
 
@@ -2302,6 +2326,10 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
+  use-sync-external-store@1.7.0(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+
   vite-plugin-singlefile@2.3.3(vite@8.2.2(@types/node@26.5.1)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       micromatch: 4.0.8
@@ -2337,7 +2365,8 @@ snapshots:
 
   zimmerframe@1.1.4: {}
 
-  zustand@5.0.15(@types/react@19.2.18)(react@19.2.8):
+  zustand@5.0.15(@types/react@19.2.18)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8)):
     optionalDependencies:
       '@types/react': 19.2.18
       react: 19.2.8
+      use-sync-external-store: 1.7.0(react@19.2.8)
